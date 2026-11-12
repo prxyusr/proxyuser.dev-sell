@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bespoke frontend engineering and high-performance web architecture for ambitious brands." />
+  <title>KINETIC // Bespoke Web Engineering & Digital Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <!-- Subtle technical background grid -->
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <!-- 1. Navigation Bar -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#top" class="brand-mark" aria-label="Kinetic Home">
+        <span class="brand-dot"></span>
+        <span class="brand-name">KINETIC<span class="accent-slash">//</span>DEV</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="#work" class="nav-link">Work</a></li>
+          <li><a href="#capabilities" class="nav-link">Capabilities</a></li>
+          <li><a href="#terminal" class="nav-link">Diagnostics</a></li>
+          <li><a href="#pricing" class="nav-link">Engagement</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#inquire" class="btn btn-primary btn-sm">Start a Project</a>
+        <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle Menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <ul class="mobile-nav-list">
+        <li><a href="#work" class="mobile-nav-link">01. Selected Work</a></li>
+        <li><a href="#capabilities" class="mobile-nav-link">02. Capabilities</a></li>
+        <li><a href="#terminal" class="mobile-nav-link">03. System CLI</a></li>
+        <li><a href="#pricing" class="mobile-nav-link">04. Engagement</a></li>
+        <li><a href="#inquire" class="btn btn-primary mobile-cta">Start a Project</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content reveal-on-scroll">
+          <div class="status-pill">
+            <span class="pulse-indicator"></span>
+            <span class="mono">SYS.STATUS: ACCEPTING Q4/Q1 COMMISSIONS</span>
+          </div>
+
+          <h1 class="hero-title">
+            Precision-engineered web interfaces built to <span class="text-accent">convert</span> &amp; outperform.
+          </h1>
+
+          <p class="hero-subtitle">
+            We partner with high-growth startups and category leaders to architect custom, zero-bloat web applications and bespoke marketing platforms with sub-second load times.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#work" class="btn btn-primary">
+              <span>View Selected Work</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+              </svg>
+            </a>
+            <a href="#inquire" class="btn btn-secondary">Book Discovery Call</a>
+          </div>
+        </div>
+
+        <!-- Asymmetric Technical Telemetry Panel -->
+        <aside class="hero-telemetry reveal-on-scroll" aria-label="Live Performance Telemetry">
+          <div class="telemetry-header">
+            <span class="mono">BENCHMARK // LIVE METRICS</span>
+            <span class="mono text-accent" id="liveClock">00:00:00 UTC</span>
+          </div>
+          <div class="telemetry-body">
+            <div class="metric-row">
+              <div class="metric-meta">
+                <span class="metric-label">LIGHTHOUSE PERFORMANCE</span>
+                <span class="mono metric-val">100 / 100</span>
+              </div>
+              <div class="metric-bar"><div class="metric-fill" style="width: 100%"></div></div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-meta">
+                <span class="metric-label">FIRST CONTENTFUL PAINT</span>
+                <span class="mono metric-val">0.28s</span>
+              </div>
+              <div class="metric-bar"><div class="metric-fill" style="width: 96%"></div></div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-meta">
+                <span class="metric-label">AVG. CONVERSION LIFT</span>
+                <span class="mono metric-val">+42.8%</span>
+              </div>
+              <div class="metric-bar"><div class="metric-fill" style="width: 88%"></div></div>
+            </div>
+            <div class="telemetry-footer mono">
+              <span>STACK: VANILLA / EDGE / WEBGL</span>
+              <span>UPTIME: 99.99%</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 3. Selected Works / Portfolio Grid -->
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div>
+            <span class="section-index mono">01 // SELECTED ARCHIVE</span>
+            <h2 class="section-title">Engineered for Impact</h2>
+          </div>
+          <p class="section-desc">
+            Every build is architected from scratch—no bloated page builders, no off-the-shelf themes.
+          </p>
+        </div>
+
+        <div class="portfolio-grid">
+          <!-- Project 1 (Featured Wide) -->
+          <article class="project-card project-featured reveal-on-scroll">
+            <div class="project-visual">
+              <div class="visual-canvas canvas-vortex">
+                <div class="wireframe-ui">
+                  <div class="wf-bar"><span></span><span></span><span></span></div>
+                  <div class="wf-grid">
+                    <div class="wf-block"></div>
+                    <div class="wf-lines">
+                      <span></span><span></span><span></span>
+                    </div>
+                  </div>
+                </div>
+                <span class="visual-tag mono">FINTECH INFRASTRUCTURE</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-meta-top">
+                <span class="mono project-year">2026</span>
+                <div class="tech-tags">
+                  <span class="tag">TypeScript</span>
+                  <span class="tag">WebGL</span>
+                  <span class="tag">Edge API</span>
+                </div>
+              </div>
+              <h3 class="project-title">VORTEX PROTOCOL</h3>
+              <p class="project-summary">
+                High-frequency liquidity dashboard and institutional landing experience. Reduced bundle size by 74% while handling 60fps real-time orderbook visualization.
+              </p>
+              <button type="button" class="project-link mono case-study-trigger" data-project="vortex">
+                <span>REQUEST CASE STUDY</span>
+                <span class="arrow">↗</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card reveal-on-scroll">
+            <div class="project-visual">
+              <div class="visual-canvas canvas-aether">
+                <div class="wireframe-circle"></div>
+                <span class="visual-tag mono">AI DEVELOPER TOOLS</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-meta-top">
+                <span class="mono project-year">2026</span>
+                <div class="tech-tags">
+                  <span class="tag">HTML5</span>
+                  <span class="tag">CSS Grid</span>
+                  <span class="tag">Vanilla JS</span>
+                </div>
+              </div>
+              <h3 class="project-title">AETHER NEURAL</h3>
+              <p class="project-summary">
+                Interactive documentation and enterprise conversion platform for a low-latency inference engine. Drove a 3.1x increase in enterprise demo bookings.
+              </p>
+              <button type="button" class="project-link mono case-study-trigger" data-project="aether">
+                <span>LIVE ARCHITECTURE</span>
+                <span class="arrow">↗</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card reveal-on-scroll">
+            <div class="project-visual">
+              <div class="visual-canvas canvas-monolith">
+                <div class="wireframe-bars">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <span class="visual-tag mono">HARDWARE &amp; AUDIO</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-meta-top">
+                <span class="mono project-year">2025</span>
+                <div class="tech-tags">
+                  <span class="tag">WebAudio</span>
+                  <span class="tag">Custom Shaders</span>
+                  <span class="tag">Headless</span>
+                </div>
+              </div>
+              <h3 class="project-title">MONOLITH ACOUSTICS</h3>
+              <p class="project-summary">
+                Direct-to-consumer flagship storefront with interactive acoustic frequency previews and sub-100ms page transitions.
+              </p>
+              <button type="button" class="project-link mono case-study-trigger" data-project="monolith">
+                <span>LIVE ARCHITECTURE</span>
+                <span class="arrow">↗</span>
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Services & Capabilities -->
+    <section class="section section-bordered" id="capabilities">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div>
+            <span class="section-index mono">02 // CORE CAPABILITIES</span>
+            <h2 class="section-title">Technical Disciplines</h2>
+          </div>
+          <p class="section-desc">
+            End-to-end execution from initial wireframe architecture to global CDN deployment.
+          </p>
+        </div>
+
+        <div class="capabilities-grid">
+          <div class="cap-card reveal-on-scroll" data-index="01">
+            <div class="cap-top">
+              <span class="mono cap-num">[01]</span>
+              <span class="cap-icon">⌘</span>
+            </div>
+            <h3 class="cap-title">Custom Frontend Engineering</h3>
+            <p class="cap-desc">
+              Hand-crafted, semantic HTML5, modern CSS architecture, and modular JavaScript built for longevity, accessibility, and zero technical debt.
+            </p>
+            <ul class="cap-list mono">
+              <li>+ Component Design Systems</li>
+              <li>+ Micro-interaction Choreography</li>
+              <li>+ Zero-Dependency Performance</li>
+            </ul>
+          </div>
+
+          <div class="cap-card reveal-on-scroll" data-index="02">
+            <div class="cap-top">
+              <span class="mono cap-num">[02]</span>
+              <span class="cap-icon">◈</span>
+            </div>
+            <h3 class="cap-title">High-Conversion UI/UX Design</h3>
+            <p class="cap-desc">
+              Bespoke visual identities and interface systems engineered around user psychology, visual hierarchy, and unambiguous calls to action.
+            </p>
+            <ul class="cap-list mono">
+              <li>+ Interactive Prototyping</li>
+              <li>+ Brand Digital Translation</li>
+              <li>+ Conversion Rate Architecture</li>
+            </ul>
+          </div>
+
+          <div class="cap-card reveal-on-scroll" data-index="03">
+            <div class="cap-top">
+              <span class="mono cap-num">[03]</span>
+              <span class="cap-icon">⚡</span>
+            </div>
+            <h3 class="cap-title">Performance &amp; Core Web Vitals</h3>
+            <p class="cap-desc">
+              Deep-level asset optimization, critical rendering path tuning, and edge caching to guarantee 99+ Lighthouse scores across all devices.
+            </p>
+            <ul class="cap-list mono">
+              <li>+ Sub-Second Load Architecture</li>
+              <li>+ Technical SEO &amp; Schema</li>
+              <li>+ Bundle &amp; Memory Profiling</li>
+            </ul>
+          </div>
+
+          <div class="cap-card reveal-on-scroll" data-index="04">
+            <div class="cap-top">
+              <span class="mono cap-num">[04]</span>
+              <span class="cap-icon">⧉</span>
+            </div>
+            <h3 class="cap-title">Interactive Web Applications</h3>
+            <p class="cap-desc">
+              Full-featured SaaS frontends, real-time dashboards, custom configurators, and API-driven platforms built to scale effortlessly.
+            </p>
+            <ul class="cap-list mono">
+              <li>+ REST / GraphQL Integration</li>
+              <li>+ Real-Time State Management</li>
+              <li>+ Custom Client Portals</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Interactive Terminal / Feature Demo -->
+    <section class="section" id="terminal">
+      <div class="container terminal-layout">
+        <div class="terminal-intro reveal-on-scroll">
+          <span class="section-index mono">03 // INTERACTIVE DIAGNOSTICS</span>
+          <h2 class="section-title">Inspect Our Architecture</h2>
+          <p class="terminal-copy">
+            Don't take our word for it. Query our interactive environment directly to inspect our tech stack, check current Q4/Q1 sprint availability, or run a simulated performance audit. Use arrow keys for history.
+          </p>
+          <div class="quick-commands">
+            <span class="mono quick-label">QUICK EXEC:</span>
+            <button type="button" class="cmd-chip mono" data-cmd="help">help</button>
+            <button type="button" class="cmd-chip mono" data-cmd="stack">stack</button>
+            <button type="button" class="cmd-chip mono" data-cmd="audit">audit</button>
+            <button type="button" class="cmd-chip mono" data-cmd="availability">availability</button>
+          </div>
+        </div>
+
+        <div class="terminal-window reveal-on-scroll" id="cliContainer">
+          <div class="terminal-bar">
+            <div class="terminal-dots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <span class="terminal-title mono">guest@kinetic-os: ~/diagnostics</span>
+            <button type="button" class="terminal-clear mono" id="clearTerminalBtn">CLEAR</button>
+          </div>
+
+          <div class="terminal-output" id="terminalOutput" role="log" aria-live="polite">
+            <div class="term-line">
+              <span class="text-accent mono">[SYSTEM]</span> Kinetic Interactive Shell v2.6.5 initialized.
+            </div>
+            <div class="term-line">
+              Type <span class="mono cmd-highlight">help</span> or click a command chip. (Tip: Use ↑/↓ for history, Tab to complete).
+            </div>
+          </div>
+
+          <form class="terminal-input-row" id="terminalForm" autocomplete="off">
+            <label for="terminalInput" class="terminal-prompt mono">visitor@kinetic:~$&nbsp;</label>
+            <input
+              type="text"
+              id="terminalInput"
+              class="terminal-input mono"
+              placeholder="Enter command..."
+              spellcheck="false"
+            />
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Pricing / Engagement Tiers -->
+    <section class="section section-bordered" id="pricing">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div>
+            <span class="section-index mono">04 // ENGAGEMENT MODELS</span>
+            <h2 class="section-title">Transparent Investment</h2>
+          </div>
+          <p class="section-desc">
+            Fixed-scope deliverables with direct engineering support. Fast turnaround and zero bloat.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Tier 1 -->
+          <div class="pricing-card reveal-on-scroll">
+            <div class="tier-header">
+              <span class="mono tier-tag">TIER 01 // LAUNCH</span>
+              <h3 class="tier-name">High-Impact Landing</h3>
+              <div class="tier-price">
+                <span class="currency">$</span>100
+                <span class="mono price-note">/ starting</span>
+              </div>
+              <p class="tier-desc">
+                Ideal for personal portfolios, quick product drops, and campaign pages needing immediate punch.
+              </p>
+            </div>
+            <ul class="tier-features">
+              <li>Single Custom-Engineered View</li>
+              <li>Hand-Coded HTML/CSS/JS Architecture</li>
+              <li>Smooth Micro-Interactions &amp; Motion</li>
+              <li>99+ Lighthouse Performance Guarantee</li>
+              <li>48-Hour Turnaround</li>
+            </ul>
+            <a href="#inquire" class="btn btn-secondary btn-full select-tier-btn" data-tier="Tier 01 — High-Impact Landing ($100)">
+              Select Launch Scope
+            </a>
+          </div>
+
+          <!-- Tier 2 (Featured) -->
+          <div class="pricing-card pricing-featured reveal-on-scroll">
+            <div class="featured-badge mono">MOST REQUESTED</div>
+            <div class="tier-header">
+              <span class="mono tier-tag text-accent">TIER 02 // SCALE</span>
+              <h3 class="tier-name">Full-Stack Brand Platform</h3>
+              <div class="tier-price">
+                <span class="currency">$</span>150
+                <span class="mono price-note">/ starting</span>
+              </div>
+              <p class="tier-desc">
+                Complete multi-page digital flagship engineered to capture leads and showcase your work.
+              </p>
+            </div>
+            <ul class="tier-features">
+              <li>Complete Design System &amp; Component Library</li>
+              <li>Up to 4 Custom-Engineered Sections/Pages</li>
+              <li>Interactive Terminal / Feature Demos</li>
+              <li>Formspree Lead Pipeline Integration</li>
+              <li>Technical SEO &amp; Mobile Optimization</li>
+              <li>14 Days Post-Launch Support</li>
+            </ul>
+            <a href="#inquire" class="btn btn-primary btn-full select-tier-btn" data-tier="Tier 02 — Full-Stack Brand Platform ($150)">
+              Initiate Scale Build
+            </a>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="pricing-card reveal-on-scroll">
+            <div class="tier-header">
+              <span class="mono tier-tag">TIER 03 // BESPOKE</span>
+              <h3 class="tier-name">Custom Web App &amp; Extras</h3>
+              <div class="tier-price">
+                <span class="currency">$</span>200<span class="plus">+</span>
+              </div>
+              <p class="tier-desc">
+                Advanced features, custom JavaScript tooling, interactive components, and dedicated architectural partnership.
+              </p>
+            </div>
+            <ul class="tier-features">
+              <li>Advanced Custom Frontend Architecture</li>
+              <li>Real-Time Interactive Elements &amp; State</li>
+              <li>Custom Animations / Visual Canvases</li>
+              <li>Priority Direct Communication</li>
+              <li>Full Code Ownership &amp; Handoff</li>
+            </ul>
+            <a href="#inquire" class="btn btn-secondary btn-full select-tier-btn" data-tier="Tier 03 — Custom Web App & Extras ($200+)">
+              Scope Custom System
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Contact / Inquiry Section -->
+    <section class="section" id="inquire">
+      <div class="container contact-grid">
+        <div class="contact-info reveal-on-scroll">
+          <span class="section-index mono">05 // INITIATE CONTACT</span>
+          <h2 class="section-title">Ready to build something undeniable?</h2>
+          <p class="contact-copy">
+            Tell us about your product, timeline, and objectives. Every inquiry is reviewed directly—expect a technical response within 24 hours.
+          </p>
+
+          <div class="contact-details">
+            <div class="detail-item">
+              <span class="mono detail-label">DIRECT ELECTRONIC MAIL</span>
+              <a href="mailto:hello@kinetic-dev.io" class="detail-value">hello@kinetic-dev.io</a>
+            </div>
+            <div class="detail-item">
+              <span class="mono detail-label">CURRENT AVAILABILITY</span>
+              <span class="detail-value">2 Q4/Q1 Project Slots Open</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="inquiry-form reveal-on-scroll" id="inquiryForm" action="https://formspree.io/f/xppdzypa" method="POST" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="clientName" class="mono form-label">01. YOUR NAME *</label>
+              <input type="text" id="clientName" name="name" class="form-input" placeholder="Alex Mercer" required />
+            </div>
+            <div class="form-group">
+              <label for="clientEmail" class="mono form-label">02. WORK EMAIL *</label>
+              <input type="email" id="clientEmail" name="email" class="form-input" placeholder="alex@company.com" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="projectScope" class="mono form-label">03. ENGAGEMENT TIER</label>
+            <select id="projectScope" name="scope" class="form-input form-select">
+              <option value="Tier 01 — High-Impact Landing ($100)">Tier 01 — High-Impact Landing ($100)</option>
+              <option value="Tier 02 — Full-Stack Brand Platform ($150)" selected>Tier 02 — Full-Stack Brand Platform ($150)</option>
+              <option value="Tier 03 — Custom Web App & Extras ($200+)">Tier 03 — Custom Web App &amp; Extras ($200+)</option>
+              <option value="Custom Advisory / Performance Audit">Custom Advisory / Performance Audit</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="projectBrief" class="mono form-label">04. PROJECT BRIEF &amp; TIMELINE *</label>
+            <textarea id="projectBrief" name="brief" rows="4" class="form-input" placeholder="Outline your goals, target launch window, and any existing URLs..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+            <span>Transmit Project Brief</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" id="submitIcon">
+              <path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+            </svg>
+          </button>
+
+          <div class="form-feedback mono" id="formFeedback" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="brand-name">KINETIC<span class="accent-slash">//</span>DEV</span>
+        <span class="mono footer-copy">&copy; 2026 KINETIC DIGITAL ARCHITECTURE. ALL RIGHTS RESERVED.</span>
+      </div>
+      <div class="footer-links mono">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+        <a href="https://x.com" target="_blank" rel="noopener noreferrer">X / TWITTER ↗</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Case Study Modal Template -->
+  <div class="modal-overlay" id="caseStudyModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-bar">
+        <span class="mono modal-eyebrow" id="modalEyebrow">ARCHITECTURE ARCHIVE</span>
+        <button type="button" class="modal-close mono" id="modalCloseBtn">CLOSE [ESC]</button>
+      </div>
+      <div class="modal-content-body" id="modalBody">
+        <!-- Dynamically injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>

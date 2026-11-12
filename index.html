@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Bespoke frontend engineering and high-performance web architecture for ambitious brands." />
-  <title>KINETIC // Bespoke Web Engineering & Digital Architecture</title>
+  <title>ProxyUser // Bespoke Web Engineering & Digital Architecture</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -1299,9 +1299,9 @@ textarea {
   <!-- 1. Navigation Bar -->
   <header class="site-header" id="top">
     <div class="container header-inner">
-      <a href="#top" class="brand-mark" aria-label="Kinetic Home">
+      <a href="#top" class="brand-mark" aria-label="ProxyUser Home">
         <span class="brand-dot"></span>
-        <span class="brand-name">KINETIC<span class="accent-slash">//</span>DEV</span>
+        <span class="brand-name">ProxyUser<span class="accent-slash">//</span>DEV</span>
       </a>
 
       <nav class="main-nav" aria-label="Primary Navigation">
@@ -1617,13 +1617,13 @@ textarea {
               <span class="dot"></span>
               <span class="dot"></span>
             </div>
-            <span class="terminal-title mono">guest@kinetic-os: ~/diagnostics</span>
+            <span class="terminal-title mono">guest@ProxyUser-os: ~/diagnostics</span>
             <button type="button" class="terminal-clear mono" id="clearTerminalBtn">CLEAR</button>
           </div>
 
           <div class="terminal-output" id="terminalOutput" role="log" aria-live="polite">
             <div class="term-line">
-              <span class="text-accent mono">[SYSTEM]</span> Kinetic Interactive Shell v2.6.5 initialized.
+              <span class="text-accent mono">[SYSTEM]</span> ProxyUser Interactive Shell v2.6.5 initialized.
             </div>
             <div class="term-line">
               Type <span class="mono cmd-highlight">help</span> or click a command chip. (Tip: Use ↑/↓ for history, Tab to complete).
@@ -1631,7 +1631,7 @@ textarea {
           </div>
 
           <form class="terminal-input-row" id="terminalForm" autocomplete="off">
-            <label for="terminalInput" class="terminal-prompt mono">visitor@kinetic:~$&nbsp;</label>
+            <label for="terminalInput" class="terminal-prompt mono">visitor@ProxyUser:~$&nbsp;</label>
             <input
               type="text"
               id="terminalInput"
@@ -1750,11 +1750,11 @@ textarea {
           <div class="contact-details">
             <div class="detail-item">
               <span class="mono detail-label">DIRECT ELECTRONIC MAIL</span>
-              <a href="mailto:hello@kinetic-dev.io" class="detail-value">hello@kinetic-dev.io</a>
+              <a href="mailto:treybrowntoday@gmail.com" class="detail-value">treybrowntoday@gmail.com</a>
             </div>
             <div class="detail-item">
               <span class="mono detail-label">CURRENT AVAILABILITY</span>
-              <span class="detail-value">2 Q4/Q1 Project Slots Open</span>
+              <span class="detail-value">4 Q4/Q1 Project Slots Open</span>
             </div>
           </div>
         </div>
@@ -1803,13 +1803,13 @@ textarea {
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-left">
-        <span class="brand-name">KINETIC<span class="accent-slash">//</span>DEV</span>
-        <span class="mono footer-copy">&copy; 2026 KINETIC DIGITAL ARCHITECTURE. ALL RIGHTS RESERVED.</span>
+        <span class="brand-name">ProxyUser<span class="accent-slash">//</span>DEV</span>
+        <span class="mono footer-copy">&copy; 2026 ProxyUser DIGITAL ARCHITECTURE. ALL RIGHTS RESERVED.</span>
       </div>
       <div class="footer-links mono">
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
-        <a href="https://x.com" target="_blank" rel="noopener noreferrer">X / TWITTER ↗</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a>
+        <a href="https://github.com/prxyusr" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+        <a href="https://www.instagram.com/ngltrey/" target="_blank" rel="noopener noreferrer">X / INSTAGRAM ↗</a>
+        <a href="https://www.linkedin.com/in/proxy-user/" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a>
       </div>
     </div>
   </footer>
@@ -2054,7 +2054,7 @@ document.addEventListener('DOMContentLoaded', () => {
     commandHistory.push(cleanCmd);
     historyIndex = commandHistory.length;
 
-    appendLine(`<span class="text-accent">visitor@kinetic:~$</span> ${escapeHTML(rawCmd)}`, true);
+    appendLine(`<span class="text-accent">visitor@ProxyUser:~$</span> ${escapeHTML(rawCmd)}`, true);
 
     if (cleanCmd === 'clear') {
       terminalOutput.innerHTML = '';

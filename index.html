@@ -2,2236 +2,557 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Dev" />
-  <title>ProxyUser // Dev</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Custom freelance web development and UI/UX engineering by ProxyUser. Clean code, responsive architecture, and rapid turnaround." />
+  <meta name="theme-color" content="#0a0a0c" />
+  <title>Proxy.Dev — Freelance Web Development & UI Engineering</title>
+
+  <!-- Typography: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
-  <style>
-/* ==========================================================================
-   1. DESIGN SYSTEM & CUSTOM PROPERTIES
-   ========================================================================== */
-:root {
-  --bg-obsidian: #05070a;
-  --bg-surface: #0a0d13;
-  --bg-elevated: #0f131c;
-  --glass-bg: rgba(10, 13, 19, 0.78);
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  --text-primary: #ffffff;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-
-  --accent-purple: #8d00ff;
-  --accent-purple-hover: #9f26ff;
-  --accent-subtle: rgba(141, 0, 255, 0.14);
-  --accent-border: rgba(141, 0, 255, 0.45);
-
-  --border-hairline: rgba(255, 255, 255, 0.09);
-  --border-strong: rgba(255, 255, 255, 0.18);
-
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-
-  --container-max: 1240px;
-  --transition-fast: 180ms cubic-bezier(0.22, 1, 0.36, 1);
-  --transition-smooth: 320ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* ==========================================================================
-   2. RESET & BASE STYLES
-   ========================================================================== */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  background-color: var(--bg-obsidian);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
-  background-color: var(--bg-obsidian);
-  overflow-x: hidden;
-  position: relative;
-}
-
-::selection {
-  background: var(--accent-purple);
-  color: var(--text-primary);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ul {
-  list-style: none;
-}
-
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
-  color: inherit;
-}
-
-.mono {
-  font-family: var(--font-mono);
-}
-
-.text-accent {
-  color: var(--accent-purple);
-}
-
-.container {
-  width: 100%;
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-/* Subtle Architectural Background Grid */
-.bg-grid {
-  position: fixed;
-  inset: 0;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 64px 64px;
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* ==========================================================================
-   3. SCROLL REVEAL CHOREOGRAPHY
-   ========================================================================== */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-
-.reveal-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal-on-scroll {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
-
-/* ==========================================================================
-   4. BUTTONS & CONTROLS
-   ========================================================================== */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.625rem;
-  padding: 0.875rem 1.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
-}
-
-.btn-sm {
-  padding: 0.55rem 1.1rem;
-  font-size: 0.825rem;
-}
-
-.btn-full {
-  width: 100%;
-}
-
-.btn-primary {
-  background-color: var(--accent-purple);
-  color: var(--text-primary);
-  border-color: var(--accent-purple);
-}
-
-.btn-primary:hover:not(:disabled) {
-  background-color: var(--accent-purple-hover);
-  border-color: var(--accent-purple-hover);
-  transform: translateY(-1px);
-}
-
-.btn-primary:disabled {
-  background-color: #3f1a63;
-  border-color: #3f1a63;
-  color: rgba(255, 255, 255, 0.7);
-  cursor: not-allowed;
-  transform: none;
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: var(--text-primary);
-  border-color: var(--border-strong);
-}
-
-.btn-secondary:hover {
-  border-color: var(--text-primary);
-  background-color: rgba(255, 255, 255, 0.04);
-}
-
-/* ==========================================================================
-   5. STICKY NAVIGATION
-   ========================================================================== */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background-color: var(--glass-bg);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border-hairline);
-}
-
-.header-inner {
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.brand-mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
-}
-
-.brand-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--accent-purple);
-  display: inline-block;
-}
-
-.accent-slash {
-  color: var(--accent-purple);
-  margin: 0 2px;
-}
-
-.nav-list {
-  display: flex;
-  align-items: center;
-  gap: 2.25rem;
-}
-
-.nav-link {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  transition: color var(--transition-fast);
-  position: relative;
-}
-
-.nav-link:hover {
-  color: var(--text-primary);
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.mobile-menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 36px;
-  height: 36px;
-  background: transparent;
-  border: 1px solid var(--border-hairline);
-  cursor: pointer;
-  padding: 0 8px;
-}
-
-.mobile-menu-toggle span {
-  display: block;
-  width: 100%;
-  height: 1.5px;
-  background-color: var(--text-primary);
-  transition: transform var(--transition-fast);
-}
-
-.mobile-nav {
-  display: none;
-  border-top: 1px solid var(--border-hairline);
-  background-color: var(--bg-obsidian);
-  padding: 1.5rem;
-}
-
-.mobile-nav.is-open {
-  display: block;
-}
-
-.mobile-nav-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.mobile-nav-link {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-}
-
-/* ==========================================================================
-   6. HERO SECTION
-   ========================================================================== */
-.hero-section {
-  padding: 6rem 0 5.5rem;
-  border-bottom: 1px solid var(--border-hairline);
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.35fr 0.85fr;
-  gap: 4rem;
-  align-items: end;
-}
-
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.4rem 0.85rem;
-  border: 1px solid var(--border-hairline);
-  background-color: var(--bg-surface);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  color: var(--text-secondary);
-  margin-bottom: 1.75rem;
-}
-
-.pulse-indicator {
-  width: 7px;
-  height: 7px;
-  background-color: var(--accent-purple);
-  border-radius: 50%;
-  animation: pulse 2.2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.35; transform: scale(0.85); }
-}
-
-.hero-title {
-  font-size: clamp(2.5rem, 4.8vw, 4.1rem);
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.035em;
-  margin-bottom: 1.5rem;
-}
-
-.hero-subtitle {
-  font-size: 1.125rem;
-  color: var(--text-secondary);
-  max-width: 58ch;
-  margin-bottom: 2.25rem;
-  line-height: 1.65;
-}
-
-.hero-cta-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-/* Telemetry Panel */
-.hero-telemetry {
-  border: 1px solid var(--border-hairline);
-  background-color: var(--bg-surface);
-}
-
-.telemetry-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.85rem 1.25rem;
-  border-bottom: 1px solid var(--border-hairline);
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-}
-
-.telemetry-body {
-  padding: 1.5rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.metric-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  margin-bottom: 0.45rem;
-}
-
-.metric-label {
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.metric-val {
-  color: var(--text-primary);
-}
-
-.metric-bar {
-  width: 100%;
-  height: 3px;
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.metric-fill {
-  height: 100%;
-  background-color: var(--accent-purple);
-}
-
-.telemetry-footer {
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-hairline);
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.68rem;
-  color: var(--text-muted);
-}
-
-/* ==========================================================================
-   7. SHARED SECTION HEADERS
-   ========================================================================== */
-.section {
-  padding: 6.5rem 0;
-}
-
-.section-bordered {
-  border-top: 1px solid var(--border-hairline);
-  border-bottom: 1px solid var(--border-hairline);
-  background-color: rgba(10, 13, 19, 0.45);
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 2rem;
-  margin-bottom: 3.5rem;
-}
-
-.section-index {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--accent-purple);
-  letter-spacing: 0.08em;
-  margin-bottom: 0.6rem;
-}
-
-.section-title {
-  font-size: clamp(1.85rem, 3vw, 2.5rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-}
-
-.section-desc {
-  color: var(--text-secondary);
-  max-width: 42ch;
-  font-size: 0.95rem;
-}
-
-/* ==========================================================================
-   8. SELECTED WORKS / PORTFOLIO GRID
-   ========================================================================== */
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.75rem;
-}
-
-.project-featured {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-}
-
-.project-card {
-  border: 1px solid var(--border-hairline);
-  background-color: var(--bg-surface);
-  transition: border-color var(--transition-smooth);
-  overflow: hidden;
-}
-
-.project-card:hover {
-  border-color: var(--accent-border);
-}
-
-.project-visual {
-  overflow: hidden;
-  border-bottom: 1px solid var(--border-hairline);
-  background-color: #07090e;
-  position: relative;
-}
-
-.project-featured .project-visual {
-  border-bottom: none;
-  border-right: 1px solid var(--border-hairline);
-}
-
-.visual-canvas {
-  height: 270px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  transition: transform var(--transition-smooth);
-}
-
-.project-featured .visual-canvas {
-  height: 100%;
-  min-height: 330px;
-}
-
-.project-card:hover .visual-canvas {
-  transform: scale(1.03);
-}
-
-/* Wireframe Art */
-.wireframe-ui {
-  border: 1px solid var(--border-strong);
-  background: var(--bg-obsidian);
-  padding: 0.85rem;
-  width: 82%;
-  margin: auto;
-}
-
-.wf-bar {
-  display: flex;
-  gap: 5px;
-  margin-bottom: 0.75rem;
-}
-
-.wf-bar span {
-  width: 6px;
-  height: 6px;
-  background: var(--border-strong);
-}
-
-.wf-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-
-.wf-block {
-  height: 76px;
-  border: 1px solid var(--accent-border);
-  background: var(--accent-subtle);
-}
-
-.wf-lines {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.wf-lines span {
-  height: 6px;
-  background: var(--border-hairline);
-  display: block;
-}
-
-.wf-lines span:first-child {
-  width: 70%;
-  background: var(--accent-purple);
-}
-
-.wireframe-circle {
-  width: 110px;
-  height: 110px;
-  border: 1px solid var(--accent-border);
-  border-radius: 50%;
-  margin: auto;
-  position: relative;
-}
-
-.wireframe-circle::after {
-  content: '';
-  position: absolute;
-  inset: 18px;
-  border: 1px dashed var(--border-strong);
-  border-radius: 50%;
-}
-
-.wireframe-bars {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 10px;
-  height: 110px;
-  margin: auto;
-}
-
-.wireframe-bars span {
-  width: 14px;
-  border: 1px solid var(--border-strong);
-  background: var(--bg-obsidian);
-}
-
-.wireframe-bars span:nth-child(1) { height: 45%; }
-.wireframe-bars span:nth-child(2) { height: 85%; border-color: var(--accent-purple); background: var(--accent-subtle); }
-.wireframe-bars span:nth-child(3) { height: 60%; }
-.wireframe-bars span:nth-child(4) { height: 95%; }
-
-.visual-tag {
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
-}
-
-.project-info {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.project-meta-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-  flex-wrap: wrap;
-}
-
-.project-year {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-.tech-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-}
-
-.tag {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  padding: 0.2rem 0.55rem;
-  border: 1px solid var(--border-hairline);
-  color: var(--text-secondary);
-}
-
-.project-title {
-  font-size: 1.45rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
-}
-
-.project-summary {
-  color: var(--text-secondary);
-  font-size: 0.94rem;
-  margin-bottom: 1.75rem;
-}
-
-.project-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: color var(--transition-fast);
-}
-
-.project-link:hover {
-  color: var(--accent-purple);
-}
-
-/* ==========================================================================
-   9. SERVICES & CAPABILITIES
-   ========================================================================== */
-.capabilities-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
-
-.cap-card {
-  padding: 2.25rem;
-  border: 1px solid var(--border-hairline);
-  background-color: var(--bg-obsidian);
-  transition: border-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.cap-card:hover {
-  border-color: var(--accent-purple);
-  transform: translateY(-2px);
-}
-
-.cap-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.cap-num {
-  font-size: 0.8rem;
-  color: var(--accent-purple);
-}
-
-.cap-icon {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-}
-
-.cap-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
-}
-
-.cap-desc {
-  color: var(--text-secondary);
-  font-size: 0.94rem;
-  margin-bottom: 1.5rem;
-}
-
-.cap-list {
-  border-top: 1px solid var(--border-hairline);
-  padding-top: 1.15rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-
-/* ==========================================================================
-   10. INTERACTIVE TERMINAL
-   ========================================================================== */
-.terminal-layout {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 3.5rem;
-  align-items: center;
-}
-
-.terminal-copy {
-  color: var(--text-secondary);
-  margin: 1.1rem 0 1.75rem;
-  font-size: 0.96rem;
-}
-
-.quick-commands {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.quick-label {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  margin-right: 0.25rem;
-}
-
-.cmd-chip {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-hairline);
-  padding: 0.35rem 0.7rem;
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: border-color var(--transition-fast), color var(--transition-fast);
-}
-
-.cmd-chip:hover {
-  border-color: var(--accent-purple);
-  color: var(--accent-purple);
-}
-
-.terminal-window {
-  border: 1px solid var(--border-strong);
-  background-color: #07090d;
-  display: flex;
-  flex-direction: column;
-}
-
-.terminal-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--border-hairline);
-  background-color: var(--bg-surface);
-}
-
-.terminal-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.terminal-dots .dot {
-  width: 9px;
-  height: 9px;
-  border: 1px solid var(--border-strong);
-}
-
-.terminal-title {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-}
-
-.terminal-clear {
-  background: transparent;
-  border: none;
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  cursor: pointer;
-}
-
-.terminal-clear:hover {
-  color: var(--text-primary);
-}
-
-.terminal-output {
-  height: 270px;
-  padding: 1.25rem;
-  overflow-y: auto;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  line-height: 1.65;
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.term-line {
-  color: var(--text-secondary);
-  word-break: break-word;
-}
-
-.term-user {
-  color: var(--text-primary);
-}
-
-.cmd-highlight {
-  color: var(--accent-purple);
-}
-
-.terminal-input-row {
-  display: flex;
-  align-items: center;
-  padding: 0.85rem 1.25rem;
-  border-top: 1px solid var(--border-hairline);
-  background-color: rgba(255, 255, 255, 0.015);
-}
-
-.terminal-prompt {
-  font-size: 0.82rem;
-  color: var(--accent-purple);
-  white-space: nowrap;
-}
-
-.terminal-input {
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 0.82rem;
-  color: var(--text-primary);
-}
-
-/* ==========================================================================
-   11. PRICING / ENGAGEMENT TIERS
-   ========================================================================== */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  align-items: stretch;
-}
-
-.pricing-card {
-  border: 1px solid var(--border-hairline);
-  background-color: var(--bg-obsidian);
-  padding: 2.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-}
-
-.pricing-featured {
-  border-color: var(--accent-purple);
-  background-color: var(--bg-surface);
-}
-
-.featured-badge {
-  position: absolute;
-  top: 0;
-  right: 1.5rem;
-  transform: translateY(-50%);
-  background-color: var(--accent-purple);
-  color: var(--text-primary);
-  font-size: 0.68rem;
-  font-weight: 600;
-  padding: 0.25rem 0.65rem;
-  letter-spacing: 0.06em;
-}
-
-.tier-tag {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  display: block;
-  margin-bottom: 0.65rem;
-}
-
-.tier-name {
-  font-size: 1.35rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.tier-price {
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: baseline;
-}
-
-.tier-price .currency {
-  font-size: 1.35rem;
-  color: var(--accent-purple);
-  margin-right: 2px;
-}
-
-.price-note {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  font-weight: 400;
-  margin-left: 0.45rem;
-}
-
-.tier-desc {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.75rem;
-}
-
-.tier-features {
-  border-top: 1px solid var(--border-hairline);
-  padding: 1.5rem 0 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-}
-
-.tier-features li::before {
-  content: '→ ';
-  color: var(--accent-purple);
-  font-family: var(--font-mono);
-}
-
-/* ==========================================================================
-   12. CONTACT / INQUIRY SECTION & ACCESSIBLE DROPDOWN
-   ========================================================================== */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 4rem;
-  align-items: start;
-}
-
-.contact-copy {
-  color: var(--text-secondary);
-  margin: 1.25rem 0 2.5rem;
-  font-size: 0.98rem;
-}
-
-.contact-details {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  border-top: 1px solid var(--border-hairline);
-  padding-top: 1.75rem;
-}
-
-.detail-label {
-  display: block;
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  margin-bottom: 0.35rem;
-}
-
-.detail-value {
-  font-size: 1.05rem;
-  font-weight: 600;
-}
-
-.inquiry-form {
-  border: 1px solid var(--border-hairline);
-  background-color: var(--bg-surface);
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.form-label {
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-  letter-spacing: 0.04em;
-}
-
-.form-input {
-  width: 100%;
-  background-color: var(--bg-obsidian);
-  border: 1px solid var(--border-hairline);
-  padding: 0.85rem 1rem;
-  font-size: 0.92rem;
-  color: var(--text-primary);
-  transition: border-color var(--transition-fast);
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: var(--accent-purple);
-}
-
-.form-select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 4L6 8L10 4' stroke='%239ca3af' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  padding-right: 2.5rem;
-  cursor: pointer;
-}
-
-.form-feedback {
-  font-size: 0.8rem;
-  min-height: 1.25rem;
-}
-
-.form-feedback.is-success {
-  color: #34d399;
-}
-
-.form-feedback.is-error {
-  color: #f87171;
-}
-
-/* ==========================================================================
-   13. INTERACTIVE CASE STUDY MODAL STYLES
-   ========================================================================== */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(5, 7, 10, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 250ms ease, visibility 250ms ease;
-}
-
-.modal-overlay.is-active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal-card {
-  width: 100%;
-  max-width: 720px;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--accent-border);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-  transform: translateY(16px);
-  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.modal-overlay.is-active .modal-card {
-  transform: translateY(0);
-}
-
-.modal-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--border-hairline);
-  background-color: var(--bg-obsidian);
-}
-
-.modal-eyebrow {
-  font-size: 0.75rem;
-  color: var(--accent-purple);
-  letter-spacing: 0.08em;
-}
-
-.modal-close {
-  background: transparent;
-  border: 1px solid var(--border-hairline);
-  padding: 0.35rem 0.75rem;
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: border-color var(--transition-fast), color var(--transition-fast);
-}
-
-.modal-close:hover {
-  border-color: var(--text-primary);
-  color: var(--text-primary);
-}
-
-.modal-content-body {
-  padding: 2.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-height: 75vh;
-  overflow-y: auto;
-}
-
-.modal-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.modal-subtitle {
-  color: var(--text-secondary);
-  font-size: 0.98rem;
-  line-height: 1.6;
-}
-
-.modal-section-title {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  letter-spacing: 0.06em;
-  margin-bottom: 0.5rem;
-}
-
-.modal-metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin: 0.5rem 0;
-}
-
-.modal-metric-box {
-  background-color: var(--bg-obsidian);
-  border: 1px solid var(--border-hairline);
-  padding: 1rem;
-  text-align: center;
-}
-
-.mm-val {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--accent-purple);
-  margin-bottom: 0.2rem;
-}
-
-.mm-lbl {
-  font-size: 0.68rem;
-  color: var(--text-muted);
-}
-
-/* ==========================================================================
-   14. FOOTER
-   ========================================================================== */
-.site-footer {
-  border-top: 1px solid var(--border-hairline);
-  padding: 2.5rem 0;
-}
-
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.footer-left {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.footer-copy {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-}
-
-.footer-links {
-  display: flex;
-  gap: 1.75rem;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
-
-.footer-links a:hover {
-  color: var(--accent-purple);
-}
-
-/* ==========================================================================
-   15. RESPONSIVE BREAKPOINTS
-   ========================================================================== */
-@media (max-width: 1024px) {
-  .hero-grid,
-  .terminal-layout,
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 2.75rem;
-  }
-
-  .project-featured {
-    grid-template-columns: 1fr;
-  }
-
-  .project-featured .project-visual {
-    border-right: none;
-    border-bottom: 1px solid var(--border-hairline);
-  }
-
-  .pricing-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .main-nav {
-    display: none;
-  }
-
-  .mobile-menu-toggle {
-    display: flex;
-  }
-
-  .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .portfolio-grid,
-  .capabilities-grid,
-  .form-row,
-  .modal-metrics-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .inquiry-form,
-  .modal-content-body {
-    padding: 1.5rem;
-  }
-}
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Subtle technical background grid -->
-  <div class="bg-grid" aria-hidden="true"></div>
+  <!-- Mobile Drawer Backdrop -->
+  <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
 
-  <!-- 1. Navigation Bar -->
-  <header class="site-header" id="top">
-    <div class="container header-inner">
-      <a href="#top" class="brand-mark" aria-label="ProxyUser Home">
-        <span class="brand-dot"></span>
-        <span class="brand-name">ProxyUser<span class="accent-slash">//</span>DEV</span>
+  <!-- Fixed Glassmorphic Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html#top" class="brand-logo" aria-label="Proxy.Dev Home">
+        <span class="logo-bracket">[</span>PROXY<span class="accent-dot">.</span>DEV<span class="logo-bracket">]</span>
       </a>
 
-      <nav class="main-nav" aria-label="Primary Navigation">
+      <!-- Primary Navigation -->
+      <nav class="nav-menu" id="nav-menu" aria-label="Primary Navigation">
+        <div class="nav-drawer-header">
+          <span class="mono-label">NAVIGATION</span>
+          <button type="button" class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Navigation Menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
         <ul class="nav-list">
+          <li><a href="about.html" class="nav-link">About Me</a></li>
           <li><a href="#work" class="nav-link">Work</a></li>
-          <li><a href="#capabilities" class="nav-link">Capabilities</a></li>
-          <li><a href="#terminal" class="nav-link">Diagnostics</a></li>
-          <li><a href="#pricing" class="nav-link">Engagement</a></li>
+          <li><a href="#pricing" class="nav-link">Pricing</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
+
+        <div class="nav-drawer-footer">
+          <a href="#contact" class="btn btn-primary btn-full nav-drawer-cta">Commissions</a>
+        </div>
       </nav>
 
-      <div class="header-actions">
-        <a href="#inquire" class="btn btn-primary btn-sm">Start a Project</a>
-        <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle Menu" aria-expanded="false">
-          <span></span>
-          <span></span>
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-primary btn-sm nav-desktop-cta">Commissions</a>
+        <button
+          type="button"
+          class="mobile-toggle-btn"
+          id="mobile-toggle-btn"
+          aria-label="Open Navigation Menu"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+        >
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
         </button>
       </div>
     </div>
-
-    <!-- Mobile Navigation Drawer -->
-    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-      <ul class="mobile-nav-list">
-        <li><a href="#work" class="mobile-nav-link">01. Selected Work</a></li>
-        <li><a href="#capabilities" class="mobile-nav-link">02. Capabilities</a></li>
-        <li><a href="#terminal" class="mobile-nav-link">03. System CLI</a></li>
-        <li><a href="#pricing" class="mobile-nav-link">04. Engagement</a></li>
-        <li><a href="#inquire" class="btn btn-primary mobile-cta">Start a Project</a></li>
-      </ul>
-    </div>
   </header>
 
-  <main>
-    <!-- 2. Hero Section -->
-    <section class="hero-section">
-      <div class="container hero-grid">
-        <div class="hero-content reveal-on-scroll">
-          <div class="status-pill">
-            <span class="pulse-indicator"></span>
-            <span class="mono">SYS.STATUS: ACCEPTING Q4/Q1 COMMISSIONS</span>
+  <main id="top">
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-grid-overlay" aria-hidden="true"></div>
+      <div class="container hero-layout">
+        <div class="hero-content">
+          <div class="availability-pill">
+            <span class="status-indicator" aria-hidden="true"></span>
+            <span>Open for Custom Commissions // proxyuser.dev</span>
           </div>
 
-          <h1 class="hero-title">
-            Precision-engineered web interfaces built to <span class="text-accent">convert</span> &amp; outperform.
+          <h1 class="hero-title" id="hero-heading">
+            Custom web engineering built by <span class="text-gradient">ProxyUser.</span>
           </h1>
 
           <p class="hero-subtitle">
-            We partner with high-growth startups and category leaders to architect custom, zero-bloat web applications and bespoke marketing platforms with sub-second load times.
+            No bloated page builders. No recycled templates. I architect and ship bespoke, responsive websites and web applications from scratch with rapid turnaround.
           </p>
 
           <div class="hero-cta-group">
-            <a href="#work" class="btn btn-primary">
-              <span>View Selected Work</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+            <a href="#pricing" class="btn btn-primary">
+              <span>View Pricing</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </a>
-            <a href="#inquire" class="btn btn-secondary">Book Discovery Call</a>
+            <a href="about.html" class="btn btn-secondary">About Me</a>
           </div>
         </div>
 
-        <!-- Asymmetric Technical Telemetry Panel -->
-        <aside class="hero-telemetry reveal-on-scroll" aria-label="Live Performance Telemetry">
-          <div class="telemetry-header">
-            <span class="mono">BENCHMARK // LIVE METRICS</span>
-            <span class="mono text-accent" id="liveClock">00:00:00 UTC</span>
+        <!-- Technical Spec Card -->
+        <aside class="hero-spec-card" aria-label="Performance Benchmarks">
+          <div class="spec-card-header">
+            <div class="window-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="mono-label">PROXY_DEV.CONFIG</span>
           </div>
-          <div class="telemetry-body">
-            <div class="metric-row">
-              <div class="metric-meta">
-                <span class="metric-label">LIGHTHOUSE PERFORMANCE</span>
-                <span class="mono metric-val">100 / 100</span>
-              </div>
-              <div class="metric-bar"><div class="metric-fill" style="width: 100%"></div></div>
+          <div class="spec-card-body">
+            <div class="spec-row">
+              <span class="spec-key">Lead Developer</span>
+              <span class="spec-val highlight">Trey Brown (ProxyUser)</span>
             </div>
-            <div class="metric-row">
-              <div class="metric-meta">
-                <span class="metric-label">FIRST CONTENTFUL PAINT</span>
-                <span class="mono metric-val">0.28s</span>
-              </div>
-              <div class="metric-bar"><div class="metric-fill" style="width: 96%"></div></div>
+            <div class="spec-row">
+              <span class="spec-key">Lighthouse Speed</span>
+              <span class="spec-val highlight">99 / 100</span>
             </div>
-            <div class="metric-row">
-              <div class="metric-meta">
-                <span class="metric-label">AVG. CONVERSION LIFT</span>
-                <span class="mono metric-val">+42.8%</span>
-              </div>
-              <div class="metric-bar"><div class="metric-fill" style="width: 88%"></div></div>
+            <div class="spec-row">
+              <span class="spec-key">Architecture</span>
+              <span class="spec-val">100% Hand-Coded</span>
             </div>
-            <div class="telemetry-footer mono">
-              <span>STACK: VANILLA / EDGE / WEBGL</span>
-              <span>UPTIME: 99.99%</span>
+            <div class="spec-row">
+              <span class="spec-key">Contact Email</span>
+              <span class="spec-val">treybrowntoday@gmail.com</span>
             </div>
           </div>
         </aside>
       </div>
     </section>
 
-    <!-- 3. Selected Works / Portfolio Grid -->
-    <section class="section" id="work">
+    <!-- Portfolio / Recent Work Showcase -->
+    <section class="section" id="work" aria-labelledby="work-heading">
       <div class="container">
-        <div class="section-header reveal-on-scroll">
+        <div class="section-header">
           <div>
-            <span class="section-index mono">01 // SELECTED ARCHIVE</span>
-            <h2 class="section-title">Engineered for Impact</h2>
+            <span class="section-eyebrow">01 // SELECTED WORK</span>
+            <h2 class="section-title" id="work-heading">Recent builds &amp; client deployments.</h2>
           </div>
-          <p class="section-desc">
-            Every build is architected from scratch—no bloated page builders, no off-the-shelf themes.
+          <p class="section-subtitle">
+            Production websites, interactive dashboards, and bespoke commission templates engineered for speed and clarity.
           </p>
         </div>
 
-        <div class="portfolio-grid">
-          <!-- Project 1 (Featured Wide) -->
-          <article class="project-card project-featured reveal-on-scroll">
-            <div class="project-visual">
-              <div class="visual-canvas canvas-vortex">
-                <div class="wireframe-ui">
-                  <div class="wf-bar"><span></span><span></span><span></span></div>
-                  <div class="wf-grid">
-                    <div class="wf-block"></div>
-                    <div class="wf-lines">
-                      <span></span><span></span><span></span>
-                    </div>
-                  </div>
-                </div>
-                <span class="visual-tag mono">FINTECH INFRASTRUCTURE</span>
+        <div class="work-grid">
+          <!-- Project 1 -->
+          <article class="project-card">
+            <div class="project-thumbnail">
+              <div class="browser-chrome" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="thumbnail-stage">
+                <span class="stage-label">FINTECH // TELEMETRY</span>
               </div>
             </div>
-            <div class="project-info">
-              <div class="project-meta-top">
-                <span class="mono project-year">2026</span>
-                <div class="tech-tags">
-                  <span class="tag">TypeScript</span>
-                  <span class="tag">WebGL</span>
-                  <span class="tag">Edge API</span>
+            <div class="project-content">
+              <div class="project-top-row">
+                <span class="project-type">Web Application</span>
+                <div class="project-actions">
+                  <a href="https://github.com/prxyusr" target="_blank" rel="noopener noreferrer" class="project-icon-btn" aria-label="View GitHub Repository" title="Source Code">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="16 18 22 12 16 6"></polyline>
+                      <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                  </a>
+                  <a href="#contact" class="project-icon-btn" aria-label="Request Live Demo" title="Live Preview">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
                 </div>
               </div>
-              <h3 class="project-title">VORTEX PROTOCOL</h3>
+              <h3 class="project-title">Vanguard Telemetry UI</h3>
               <p class="project-summary">
-                High-frequency liquidity dashboard and institutional landing experience. Reduced bundle size by 74% while handling 60fps real-time orderbook visualization.
+                High-density metrics dashboard built with zero heavy front-end frameworks for sub-50ms interaction latency.
               </p>
-              <button type="button" class="project-link mono case-study-trigger" data-project="vortex">
-                <span>REQUEST CASE STUDY</span>
-                <span class="arrow">↗</span>
-              </button>
+              <div class="project-tags">
+                <span>HTML5</span>
+                <span>CSS Grid</span>
+                <span>Vanilla JS</span>
+                <span>REST API</span>
+              </div>
             </div>
           </article>
 
           <!-- Project 2 -->
-          <article class="project-card reveal-on-scroll">
-            <div class="project-visual">
-              <div class="visual-canvas canvas-aether">
-                <div class="wireframe-circle"></div>
-                <span class="visual-tag mono">AI DEVELOPER TOOLS</span>
+          <article class="project-card">
+            <div class="project-thumbnail">
+              <div class="browser-chrome" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="thumbnail-stage">
+                <span class="stage-label">CREATOR // AUDIO</span>
               </div>
             </div>
-            <div class="project-info">
-              <div class="project-meta-top">
-                <span class="mono project-year">2026</span>
-                <div class="tech-tags">
-                  <span class="tag">HTML5</span>
-                  <span class="tag">CSS Grid</span>
-                  <span class="tag">Vanilla JS</span>
+            <div class="project-content">
+              <div class="project-top-row">
+                <span class="project-type">Commission Portal</span>
+                <div class="project-actions">
+                  <a href="https://github.com/prxyusr" target="_blank" rel="noopener noreferrer" class="project-icon-btn" aria-label="View GitHub Repository" title="Source Code">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="16 18 22 12 16 6"></polyline>
+                      <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                  </a>
+                  <a href="#contact" class="project-icon-btn" aria-label="Request Live Demo" title="Live Preview">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
                 </div>
               </div>
-              <h3 class="project-title">AETHER NEURAL</h3>
+              <h3 class="project-title">Aether Voice &amp; Soundboard</h3>
               <p class="project-summary">
-                Interactive documentation and enterprise conversion platform for a low-latency inference engine. Drove a 3.1x increase in enterprise demo bookings.
+                Dark-themed talent showcase featuring custom HTML5 audio sample players and automated webhook inquiry routing.
               </p>
-              <button type="button" class="project-link mono case-study-trigger" data-project="aether">
-                <span>LIVE ARCHITECTURE</span>
-                <span class="arrow">↗</span>
-              </button>
+              <div class="project-tags">
+                <span>UI/UX</span>
+                <span>Audio API</span>
+                <span>Webhooks</span>
+              </div>
             </div>
           </article>
 
           <!-- Project 3 -->
-          <article class="project-card reveal-on-scroll">
-            <div class="project-visual">
-              <div class="visual-canvas canvas-monolith">
-                <div class="wireframe-bars">
-                  <span></span><span></span><span></span><span></span>
-                </div>
-                <span class="visual-tag mono">HARDWARE &amp; AUDIO</span>
+          <article class="project-card">
+            <div class="project-thumbnail">
+              <div class="browser-chrome" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="thumbnail-stage">
+                <span class="stage-label">LOCAL // SERVICE</span>
               </div>
             </div>
-            <div class="project-info">
-              <div class="project-meta-top">
-                <span class="mono project-year">2025</span>
-                <div class="tech-tags">
-                  <span class="tag">WebAudio</span>
-                  <span class="tag">Custom Shaders</span>
-                  <span class="tag">Headless</span>
+            <div class="project-content">
+              <div class="project-top-row">
+                <span class="project-type">Business Platform</span>
+                <div class="project-actions">
+                  <a href="https://github.com/prxyusr" target="_blank" rel="noopener noreferrer" class="project-icon-btn" aria-label="View GitHub Repository" title="Source Code">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="16 18 22 12 16 6"></polyline>
+                      <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                  </a>
+                  <a href="#contact" class="project-icon-btn" aria-label="Request Live Demo" title="Live Preview">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
                 </div>
               </div>
-              <h3 class="project-title">MONOLITH ACOUSTICS</h3>
+              <h3 class="project-title">Apex Industrial Group</h3>
               <p class="project-summary">
-                Direct-to-consumer flagship storefront with interactive acoustic frequency previews and sub-100ms page transitions.
+                Multi-page corporate presence engineered for local search visibility, instant quote capture, and 100/100 mobile speed.
               </p>
-              <button type="button" class="project-link mono case-study-trigger" data-project="monolith">
-                <span>LIVE ARCHITECTURE</span>
-                <span class="arrow">↗</span>
-              </button>
+              <div class="project-tags">
+                <span>Multi-Page</span>
+                <span>Technical SEO</span>
+                <span>Responsive</span>
+              </div>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- 4. Services & Capabilities -->
-    <section class="section section-bordered" id="capabilities">
+    <!-- 3 Pricing Tiers (Tier 1 Featured / Most Popular) -->
+    <section class="section" id="pricing" aria-labelledby="pricing-heading">
       <div class="container">
-        <div class="section-header reveal-on-scroll">
-          <div>
-            <span class="section-index mono">02 // CORE CAPABILITIES</span>
-            <h2 class="section-title">Technical Disciplines</h2>
-          </div>
-          <p class="section-desc">
-            End-to-end execution from initial wireframe architecture to global CDN deployment.
-          </p>
-        </div>
-
-        <div class="capabilities-grid">
-          <div class="cap-card reveal-on-scroll" data-index="01">
-            <div class="cap-top">
-              <span class="mono cap-num">[01]</span>
-              <span class="cap-icon">⌘</span>
-            </div>
-            <h3 class="cap-title">Custom Frontend Engineering</h3>
-            <p class="cap-desc">
-              Hand-crafted, semantic HTML5, modern CSS architecture, and modular JavaScript built for longevity, accessibility, and zero technical debt.
-            </p>
-            <ul class="cap-list mono">
-              <li>+ Component Design Systems</li>
-              <li>+ Micro-interaction Choreography</li>
-              <li>+ Zero-Dependency Performance</li>
-            </ul>
-          </div>
-
-          <div class="cap-card reveal-on-scroll" data-index="02">
-            <div class="cap-top">
-              <span class="mono cap-num">[02]</span>
-              <span class="cap-icon">◈</span>
-            </div>
-            <h3 class="cap-title">High-Conversion UI/UX Design</h3>
-            <p class="cap-desc">
-              Bespoke visual identities and interface systems engineered around user psychology, visual hierarchy, and unambiguous calls to action.
-            </p>
-            <ul class="cap-list mono">
-              <li>+ Interactive Prototyping</li>
-              <li>+ Brand Digital Translation</li>
-              <li>+ Conversion Rate Architecture</li>
-            </ul>
-          </div>
-
-          <div class="cap-card reveal-on-scroll" data-index="03">
-            <div class="cap-top">
-              <span class="mono cap-num">[03]</span>
-              <span class="cap-icon">⚡</span>
-            </div>
-            <h3 class="cap-title">Performance &amp; Core Web Vitals</h3>
-            <p class="cap-desc">
-              Deep-level asset optimization, critical rendering path tuning, and edge caching to guarantee 99+ Lighthouse scores across all devices.
-            </p>
-            <ul class="cap-list mono">
-              <li>+ Sub-Second Load Architecture</li>
-              <li>+ Technical SEO &amp; Schema</li>
-              <li>+ Bundle &amp; Memory Profiling</li>
-            </ul>
-          </div>
-
-          <div class="cap-card reveal-on-scroll" data-index="04">
-            <div class="cap-top">
-              <span class="mono cap-num">[04]</span>
-              <span class="cap-icon">⧉</span>
-            </div>
-            <h3 class="cap-title">Interactive Web Applications</h3>
-            <p class="cap-desc">
-              Full-featured SaaS frontends, real-time dashboards, custom configurators, and API-driven platforms built to scale effortlessly.
-            </p>
-            <ul class="cap-list mono">
-              <li>+ REST / GraphQL Integration</li>
-              <li>+ Real-Time State Management</li>
-              <li>+ Custom Client Portals</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. Interactive Terminal / Feature Demo -->
-    <section class="section" id="terminal">
-      <div class="container terminal-layout">
-        <div class="terminal-intro reveal-on-scroll">
-          <span class="section-index mono">03 // INTERACTIVE DIAGNOSTICS</span>
-          <h2 class="section-title">Inspect Our Architecture</h2>
-          <p class="terminal-copy">
-            Don't take our word for it. Query our interactive environment directly to inspect our tech stack, check current Q4/Q1 sprint availability, or run a simulated performance audit. Use arrow keys for history.
-          </p>
-          <div class="quick-commands">
-            <span class="mono quick-label">QUICK EXEC:</span>
-            <button type="button" class="cmd-chip mono" data-cmd="help">help</button>
-            <button type="button" class="cmd-chip mono" data-cmd="stack">stack</button>
-            <button type="button" class="cmd-chip mono" data-cmd="audit">audit</button>
-            <button type="button" class="cmd-chip mono" data-cmd="availability">availability</button>
-          </div>
-        </div>
-
-        <div class="terminal-window reveal-on-scroll" id="cliContainer">
-          <div class="terminal-bar">
-            <div class="terminal-dots">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-            <span class="terminal-title mono">guest@ProxyUser-os: ~/diagnostics</span>
-            <button type="button" class="terminal-clear mono" id="clearTerminalBtn">CLEAR</button>
-          </div>
-
-          <div class="terminal-output" id="terminalOutput" role="log" aria-live="polite">
-            <div class="term-line">
-              <span class="text-accent mono">[SYSTEM]</span> ProxyUser Interactive Shell v2.6.5 initialized.
-            </div>
-            <div class="term-line">
-              Type <span class="mono cmd-highlight">help</span> or click a command chip. (Tip: Use ↑/↓ for history, Tab to complete).
-            </div>
-          </div>
-
-          <form class="terminal-input-row" id="terminalForm" autocomplete="off">
-            <label for="terminalInput" class="terminal-prompt mono">visitor@ProxyUser:~$&nbsp;</label>
-            <input
-              type="text"
-              id="terminalInput"
-              class="terminal-input mono"
-              placeholder="Enter command..."
-              spellcheck="false"
-            />
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. Pricing / Engagement Tiers -->
-    <section class="section section-bordered" id="pricing">
-      <div class="container">
-        <div class="section-header reveal-on-scroll">
-          <div>
-            <span class="section-index mono">04 // ENGAGEMENT MODELS</span>
-            <h2 class="section-title">Transparent Investment</h2>
-          </div>
-          <p class="section-desc">
-            Fixed-scope deliverables with direct engineering support. Fast turnaround and zero bloat.
+        <div class="section-header centered">
+          <span class="section-eyebrow">02 // COMMISSION PACKAGES</span>
+          <h2 class="section-title" id="pricing-heading">Clear, fixed-scope tiers.</h2>
+          <p class="section-subtitle">
+            Choose a package matched to your project's complexity. All tiers include complete source code ownership and deployment setup.
           </p>
         </div>
 
         <div class="pricing-grid">
-          <!-- Tier 1 -->
-          <div class="pricing-card reveal-on-scroll">
-            <div class="tier-header">
-              <span class="mono tier-tag">TIER 01 // LAUNCH</span>
-              <h3 class="tier-name">High-Impact Landing</h3>
+          <!-- Tier 1 ($100 Featured / Most Popular) -->
+          <div class="pricing-card featured">
+            <div class="featured-ribbon">MOST POPULAR</div>
+            <div class="pricing-card-head">
+              <span class="tier-index">TIER 01</span>
+              <h3 class="tier-title">Landing Page / Starter</h3>
               <div class="tier-price">
-                <span class="currency">$</span>100
-                <span class="mono price-note">/ starting</span>
+                <span class="currency">$</span>100<span class="suffix"> starting</span>
               </div>
-              <p class="tier-desc">
-                Ideal for personal portfolios, quick product drops, and campaign pages needing immediate punch.
+              <p class="tier-tagline">
+                Focused single-page site built to launch quickly and convert incoming traffic.
               </p>
             </div>
-            <ul class="tier-features">
-              <li>Single Custom-Engineered View</li>
-              <li>Hand-Coded HTML/CSS/JS Architecture</li>
-              <li>Smooth Micro-Interactions &amp; Motion</li>
-              <li>99+ Lighthouse Performance Guarantee</li>
-              <li>48-Hour Turnaround</li>
+            <ul class="tier-checklist">
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Custom single-page responsive layout</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Fast 3–5 business day delivery</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Foundational on-page SEO &amp; metadata</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Direct contact form integration</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>2 rounds of revisions</span>
+              </li>
             </ul>
-            <a href="#inquire" class="btn btn-secondary btn-full select-tier-btn" data-tier="Tier 01 — High-Impact Landing ($100)">
-              Select Launch Scope
+            <a href="#contact" class="btn btn-primary btn-full tier-select-btn" data-tier="Starter ($100+)">
+              Choose Starter
             </a>
           </div>
 
-          <!-- Tier 2 (Featured) -->
-          <div class="pricing-card pricing-featured reveal-on-scroll">
-            <div class="featured-badge mono">MOST REQUESTED</div>
-            <div class="tier-header">
-              <span class="mono tier-tag text-accent">TIER 02 // SCALE</span>
-              <h3 class="tier-name">Full-Stack Brand Platform</h3>
+          <!-- Tier 2 ($150) -->
+          <div class="pricing-card">
+            <div class="pricing-card-head">
+              <span class="tier-index">TIER 02</span>
+              <h3 class="tier-title">Professional Business Site</h3>
               <div class="tier-price">
-                <span class="currency">$</span>150
-                <span class="mono price-note">/ starting</span>
+                <span class="currency">$</span>150<span class="suffix"> starting</span>
               </div>
-              <p class="tier-desc">
-                Complete multi-page digital flagship engineered to capture leads and showcase your work.
+              <p class="tier-tagline">
+                Complete multi-page architecture for established businesses and growing brands.
               </p>
             </div>
-            <ul class="tier-features">
-              <li>Complete Design System &amp; Component Library</li>
-              <li>Up to 4 Custom-Engineered Sections/Pages</li>
-              <li>Interactive Terminal / Feature Demos</li>
-              <li>Formspree Lead Pipeline Integration</li>
-              <li>Technical SEO &amp; Mobile Optimization</li>
-              <li>14 Days Post-Launch Support</li>
+            <ul class="tier-checklist">
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Up to 5 custom-designed pages</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Bespoke micro-interactions &amp; animations</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Advanced contact &amp; webhook integration</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Core Web Vitals &amp; speed optimization</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Full domain &amp; hosting deployment</span>
+              </li>
             </ul>
-            <a href="#inquire" class="btn btn-primary btn-full select-tier-btn" data-tier="Tier 02 — Full-Stack Brand Platform ($150)">
-              Initiate Scale Build
+            <a href="#contact" class="btn btn-secondary btn-full tier-select-btn" data-tier="Professional ($150+)">
+              Choose Professional
             </a>
           </div>
 
-          <!-- Tier 3 -->
-          <div class="pricing-card reveal-on-scroll">
-            <div class="tier-header">
-              <span class="mono tier-tag">TIER 03 // BESPOKE</span>
-              <h3 class="tier-name">Custom Web App &amp; Extras</h3>
+          <!-- Tier 3 ($200) -->
+          <div class="pricing-card">
+            <div class="pricing-card-head">
+              <span class="tier-index">TIER 03</span>
+              <h3 class="tier-title">Custom Web App / Advanced</h3>
               <div class="tier-price">
-                <span class="currency">$</span>200<span class="plus">+</span>
+                <span class="currency">$</span>200<span class="suffix"> starting</span>
               </div>
-              <p class="tier-desc">
-                Advanced features, custom JavaScript tooling, interactive components, and dedicated architectural partnership.
+              <p class="tier-tagline">
+                Bespoke web applications, interactive dashboards, and custom backend/API hooks.
               </p>
             </div>
-            <ul class="tier-features">
-              <li>Advanced Custom Frontend Architecture</li>
-              <li>Real-Time Interactive Elements &amp; State</li>
-              <li>Custom Animations / Visual Canvases</li>
-              <li>Priority Direct Communication</li>
-              <li>Full Code Ownership &amp; Handoff</li>
+            <ul class="tier-checklist">
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Custom architecture &amp; unlimited pages</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Interactive tools, portals &amp; state logic</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Database, auth &amp; third-party API hooks</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Custom Python / Lua automation scripts</span>
+              </li>
+              <li>
+                <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>30 days priority post-launch support</span>
+              </li>
             </ul>
-            <a href="#inquire" class="btn btn-secondary btn-full select-tier-btn" data-tier="Tier 03 — Custom Web App & Extras ($200+)">
-              Scope Custom System
+            <a href="#contact" class="btn btn-secondary btn-full tier-select-btn" data-tier="Custom Web App ($200+)">
+              Choose Custom App
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 7. Contact / Inquiry Section -->
-    <section class="section" id="inquire">
-      <div class="container contact-grid">
-        <div class="contact-info reveal-on-scroll">
-          <span class="section-index mono">05 // INITIATE CONTACT</span>
-          <h2 class="section-title">Ready to build something undeniable?</h2>
-          <p class="contact-copy">
-            Tell us about your product, timeline, and objectives. Every inquiry is reviewed directly—expect a technical response within 24 hours.
-          </p>
-
+    <!-- Contact / Request Form Section -->
+    <section class="section" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="contact-grid">
           <div class="contact-details">
-            <div class="detail-item">
-              <span class="mono detail-label">DIRECT ELECTRONIC MAIL</span>
-              <a href="mailto:treybrowntoday@gmail.com" class="detail-value">treybrowntoday@gmail.com</a>
-            </div>
-            <div class="detail-item">
-              <span class="mono detail-label">CURRENT AVAILABILITY</span>
-              <span class="detail-value">4 Q4/Q1 Project Slots Open</span>
+            <span class="section-eyebrow">03 // START A PROJECT</span>
+            <h2 class="section-title" id="contact-heading">Send over your project brief.</h2>
+            <p class="body-copy">
+              Share your goals, preferred commission tier, and target timeline. I review every inquiry directly and respond within 24 hours at <strong style="color: var(--text-primary);">treybrowntoday@gmail.com</strong>.
+            </p>
+
+            <div class="workflow-list">
+              <div class="workflow-item">
+                <span class="workflow-step">01</span>
+                <div>
+                  <h3>Technical Scope</h3>
+                  <p>We define features, page structure, and exact turnaround milestones.</p>
+                </div>
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-step">02</span>
+                <div>
+                  <h3>Live Staging Build</h3>
+                  <p>You receive a private preview URL to review progress across devices.</p>
+                </div>
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-step">03</span>
+                <div>
+                  <h3>Production Launch</h3>
+                  <p>Final QA audit, domain connection, and complete source code handoff.</p>
+                </div>
+              </div>
             </div>
           </div>
+
+          <form
+            class="commission-form"
+            id="commission-form"
+            action="https://formspree.io/f/xppdzypa"
+            method="POST"
+            novalidate
+          >
+            <div class="form-field">
+              <label for="name">Name / Handle <span class="req" aria-hidden="true">*</span></label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                inputmode="text"
+                autocomplete="name"
+                placeholder="Jordan Taylor"
+                required
+              />
+              <span class="field-error" id="name-error" role="alert"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="email">Email Address <span class="req" aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="jordan@domain.com"
+                required
+              />
+              <span class="field-error" id="email-error" role="alert"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="tier">Project Type / Tier <span class="req" aria-hidden="true">*</span></label>
+              <select id="tier" name="project_tier" required>
+                <option value="" disabled selected>Select a commission package...</option>
+                <option value="Starter ($100+)">Tier 1: Landing Page / Starter ($100+)</option>
+                <option value="Professional ($150+)">Tier 2: Professional Business Site ($150+)</option>
+                <option value="Custom Web App ($200+)">Tier 3: Custom Web App / Advanced ($200+)</option>
+                <option value="Custom Quote">Custom Scope / Other Inquiry</option>
+              </select>
+              <span class="field-error" id="tier-error" role="alert"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="details">Project Details &amp; Budget <span class="req" aria-hidden="true">*</span></label>
+              <textarea
+                id="details"
+                name="message"
+                rows="4"
+                placeholder="Outline your project goals, required features, ideal deadline, and estimated budget..."
+                required
+              ></textarea>
+              <span class="field-error" id="details-error" role="alert"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
+              <span>Submit Project Request</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+
+            <div class="form-feedback" id="form-feedback" role="status" aria-live="polite"></div>
+          </form>
         </div>
-
-        <form class="inquiry-form reveal-on-scroll" id="inquiryForm" action="https://formspree.io/f/xppdzypa" method="POST" novalidate>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="clientName" class="mono form-label">01. YOUR NAME *</label>
-              <input type="text" id="clientName" name="name" class="form-input" placeholder="Alex Mercer" required />
-            </div>
-            <div class="form-group">
-              <label for="clientEmail" class="mono form-label">02. WORK EMAIL *</label>
-              <input type="email" id="clientEmail" name="email" class="form-input" placeholder="alex@company.com" required />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="projectScope" class="mono form-label">03. ENGAGEMENT TIER</label>
-            <select id="projectScope" name="scope" class="form-input form-select">
-              <option value="Tier 01 — High-Impact Landing ($100)">Tier 01 — High-Impact Landing ($100)</option>
-              <option value="Tier 02 — Full-Stack Brand Platform ($150)" selected>Tier 02 — Full-Stack Brand Platform ($150)</option>
-              <option value="Tier 03 — Custom Web App & Extras ($200+)">Tier 03 — Custom Web App &amp; Extras ($200+)</option>
-              <option value="Custom Advisory / Performance Audit">Custom Advisory / Performance Audit</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="projectBrief" class="mono form-label">04. PROJECT BRIEF &amp; TIMELINE *</label>
-            <textarea id="projectBrief" name="brief" rows="4" class="form-input" placeholder="Outline your goals, target launch window, and any existing URLs..." required></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
-            <span>Transmit Project Brief</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" id="submitIcon">
-              <path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
-            </svg>
-          </button>
-
-          <div class="form-feedback mono" id="formFeedback" role="status" aria-live="polite"></div>
-        </form>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-left">
-        <span class="brand-name">ProxyUser<span class="accent-slash">//</span>DEV</span>
-        <span class="mono footer-copy">&copy; 2026 ProxyUser DIGITAL ARCHITECTURE. ALL RIGHTS RESERVED.</span>
+<footer class="footer">
+    <div class="container footer-top">
+      <div class="footer-brand">
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer" class="brand-logo">
+          <span class="logo-bracket">[</span>PROXY<span class="accent-dot">.</span>DEV<span class="logo-bracket">]</span>
+        </a>
+        <div class="footer-availability">
+          <span class="status-indicator" aria-hidden="true"></span>
+          <span>Proxy.Dev // proxyuser.dev</span>
+        </div>
       </div>
-      <div class="footer-links mono">
-        <a href="https://github.com/prxyusr" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
-        <a href="https://www.instagram.com/ngltrey/" target="_blank" rel="noopener noreferrer">X / INSTAGRAM ↗</a>
-        <a href="https://www.linkedin.com/in/proxy-user/" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a>
+
+      <div class="social-row" aria-label="Social Media Links">
+        <a href="https://github.com/prxyusr" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub Profile">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/proxy-user/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn Profile">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/ngltrey/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram Profile">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
       </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; <span id="year">2026</span> Proxy.Dev (ProxyUser). All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Interactive Case Study Modal Template -->
-  <div class="modal-overlay" id="caseStudyModal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal-card">
-      <div class="modal-bar">
-        <span class="mono modal-eyebrow" id="modalEyebrow">ARCHITECTURE ARCHIVE</span>
-        <button type="button" class="modal-close mono" id="modalCloseBtn">CLOSE [ESC]</button>
-      </div>
-      <div class="modal-content-body" id="modalBody">
-        <!-- Dynamically injected via JS -->
-      </div>
-    </div>
-  </div>
-
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  /* ========================================================================
-     1. LIVE UTC TELEMETRY CLOCK
-     ======================================================================== */
-  const liveClockEl = document.getElementById('liveClock');
-
-  function updateClock() {
-    if (!liveClockEl) return;
-    const now = new Date();
-    liveClockEl.textContent = now.toISOString().substring(11, 19) + ' UTC';
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
-
-  /* ========================================================================
-     2. MOBILE NAVIGATION DRAWER & ACCESSIBILITY
-     ======================================================================== */
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const mobileNav = document.getElementById('mobileNav');
-  const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-cta');
-
-  if (mobileMenuBtn && mobileNav) {
-    mobileMenuBtn.addEventListener('click', () => {
-      const isOpen = mobileNav.classList.toggle('is-open');
-      mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
-      mobileNav.setAttribute('aria-hidden', String(!isOpen));
-    });
-
-    mobileLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileNav.classList.remove('is-open');
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        mobileNav.setAttribute('aria-hidden', 'true');
-      });
-    });
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (mobileNav && mobileNav.classList.contains('is-open')) {
-        mobileNav.classList.remove('is-open');
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        mobileNav.setAttribute('aria-hidden', 'true');
-      }
-      closeCaseStudyModal();
-    }
-  });
-
-  /* ========================================================================
-     3. SCROLL REVEAL CHOREOGRAPHY WITH INTERSECTION OBSERVER
-     ======================================================================== */
-  const revealElements = document.querySelectorAll('.reveal-on-scroll');
-
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -50px 0px' }
-  );
-
-  revealElements.forEach((el) => revealObserver.observe(el));
-
-  /* ========================================================================
-     4. INTERACTIVE CASE STUDY MODALS
-     ======================================================================== */
-  const modalOverlay = document.getElementById('caseStudyModal');
-  const modalCloseBtn = document.getElementById('modalCloseBtn');
-  const modalBody = document.getElementById('modalBody');
-  const caseStudyTriggers = document.querySelectorAll('.case-study-trigger');
-
-  const caseStudies = {
-    vortex: {
-      title: 'VORTEX PROTOCOL',
-      eyebrow: 'ARCHIVE // 01 — FINTECH INFRASTRUCTURE',
-      subtitle: 'Institutional liquidity dashboard engineered for sub-millisecond execution and real-time WebSocket orderbook visualization at 60 FPS.',
-      metrics: [
-        { val: '-74%', lbl: 'Bundle Size Reduction' },
-        { val: '60 FPS', lbl: 'Orderbook Render Rate' },
-        { val: '<15ms', lbl: 'Average WebSocket Latency' }
-      ],
-      details: 'Built completely without component library bloat. Utilizes direct HTML5 Canvas rendering for high-frequency depth charts, custom memory pooling for WebSocket state management, and edge worker token authentication.'
-    },
-    aether: {
-      title: 'AETHER NEURAL',
-      eyebrow: 'ARCHIVE // 02 — AI DEVELOPER PLATFORM',
-      subtitle: 'Enterprise documentation and sandbox portal for a low-latency neural inference engine. Increased enterprise qualified demo conversions by 3.1x.',
-      metrics: [
-        { val: '3.1x', lbl: 'Demo Booking Lift' },
-        { val: '100/100', lbl: 'Lighthouse Score Across All Vitals' },
-        { val: '0.28s', lbl: 'First Contentful Paint' }
-      ],
-      details: 'Engineered with zero-dependency vanilla JS syntax highlighting, instant client-side search indexing, and a modular CSS grid system designed for effortless maintenance and lightning-fast developer onboarding.'
-    },
-    monolith: {
-      title: 'MONOLITH ACOUSTICS',
-      eyebrow: 'ARCHIVE // 03 — HARDWARE & AUDIO STOREFRONT',
-      subtitle: 'Direct-to-consumer flagship ecommerce experience featuring interactive frequency response previews and seamless page transitions.',
-      metrics: [
-        { val: '+52%', lbl: 'Checkout Completion Rate' },
-        { val: '<90ms', lbl: 'Page Transition Speed' },
-        { val: '4.8s', lbl: 'Avg. User Session Duration' }
-      ],
-      details: 'Leverages the Web Audio API for custom interactive sound profile previews directly in the browser without third-party audio player plugins, backed by a lightning-fast headless Shopify GraphQL integration.'
-    }
-  };
-
-  function openCaseStudyModal(projectId) {
-    const data = caseStudies[projectId];
-    if (!data || !modalOverlay || !modalBody) return;
-
-    modalBody.innerHTML = `
-      <span class="mono" style="font-size: 0.72rem; color: var(--accent-purple);">${data.eyebrow}</span>
-      <h3 class="modal-title">${data.title}</h3>
-      <p class="modal-subtitle">${data.subtitle}</p>
-      
-      <div class="modal-metrics-grid">
-        ${data.metrics.map(m => `
-          <div class="modal-metric-box">
-            <div class="mono mm-val">${m.val}</div>
-            <div class="mono mm-lbl">${m.lbl}</div>
-          </div>
-        `).join('')}
-      </div>
-
-      <div style="margin-top: 1rem;">
-        <h4 class="mono modal-section-title">ARCHITECTURAL OVERVIEW</h4>
-        <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6;">${data.details}</p>
-      </div>
-
-      <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-        <a href="#inquire" class="btn btn-primary btn-sm modal-action-btn">Commission Similar Architecture</a>
-        <button type="button" class="btn btn-secondary btn-sm" id="modalDismissBtn">Close Archive</button>
-      </div>
-    `;
-
-    document.getElementById('modalDismissBtn').addEventListener('click', closeCaseStudyModal);
-    modalOverlay.classList.add('is-active');
-    modalOverlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeCaseStudyModal() {
-    if (!modalOverlay) return;
-    modalOverlay.classList.remove('is-active');
-    modalOverlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  caseStudyTriggers.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const proj = btn.getAttribute('data-project');
-      openCaseStudyModal(proj);
-    });
-  });
-
-  if (modalCloseBtn && modalOverlay) {
-    modalCloseBtn.addEventListener('click', closeCaseStudyModal);
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) closeCaseStudyModal();
-    });
-  }
-
-  /* ========================================================================
-     5. INTERACTIVE CLI TERMINAL
-     ======================================================================== */
-  const terminalForm = document.getElementById('terminalForm');
-  const terminalInput = document.getElementById('terminalInput');
-  const terminalOutput = document.getElementById('terminalOutput');
-  const clearTerminalBtn = document.getElementById('clearTerminalBtn');
-  const cmdChips = document.querySelectorAll('.cmd-chip');
-  const cliContainer = document.getElementById('cliContainer');
-
-  let commandHistory = [];
-  let historyIndex = -1;
-
-  const commands = {
-    help: [
-      'Available commands:',
-      '  <span class="cmd-highlight">stack</span>        - Inspect core engineering languages &amp; infrastructure',
-      '  <span class="cmd-highlight">audit</span>        - Run live runtime &amp; DOM performance diagnostic',
-      '  <span class="cmd-highlight">availability</span> - View Q4/Q1 sprint allocation &amp; lead times',
-      '  <span class="cmd-highlight">pricing</span>      - Display starting engagement investment tiers',
-      '  <span class="cmd-highlight">clear</span>        - Flush terminal buffer'
-    ],
-    stack: [
-      '[ARCHITECTURE STACK]',
-      '  Core:      Semantic HTML5, Modern CSS Grid/Custom Props, Vanilla ES2025+',
-      '  Graphics:  WebGL / GLSL Shaders, Canvas 2D, SVG Choreography',
-      '  Backend:   Edge Workers, Node.js, Headless CMS, GraphQL/REST',
-      '  Hosting:   Global CDN Edge (Sub-30ms TTFB)'
-    ],
-    availability: [
-      '[CAPACITY SCHEDULE]',
-      '  Current Sprint Status: <span class="cmd-highlight">OPEN (2 Slots Remaining)</span>',
-      '  Next Onboarding Window: Within 5 business days',
-      '  Typical Launch Timeline: 2–5 days depending on scope'
-    ],
-    pricing: [
-      '[ENGAGEMENT TIERS]',
-      '  01. High-Impact Landing   -> $100 (48 hours)',
-      '  02. Full-Stack Platform   -> $150 (1 week)',
-      '  03. Custom Web App &amp; Extras -> $200+ (Custom scope)'
-    ]
-  };
-
-  function appendLine(htmlContent, isUser = false) {
-    if (!terminalOutput) return;
-    const div = document.createElement('div');
-    div.className = isUser ? 'term-line term-user' : 'term-line';
-    div.innerHTML = htmlContent;
-    terminalOutput.appendChild(div);
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-  }
-
-  function executeCommand(rawCmd) {
-    const cleanCmd = rawCmd.trim().toLowerCase();
-    if (!cleanCmd) return;
-
-    commandHistory.push(cleanCmd);
-    historyIndex = commandHistory.length;
-
-    appendLine(`<span class="text-accent">visitor@ProxyUser:~$</span> ${escapeHTML(rawCmd)}`, true);
-
-    if (cleanCmd === 'clear') {
-      terminalOutput.innerHTML = '';
-      return;
-    }
-
-    if (cleanCmd === 'audit') {
-      const domNodes = document.getElementsByTagName('*').length;
-      const loadTime = Math.round(performance.now());
-      appendLine('[RUNNING RUNTIME AUDIT...]');
-      setTimeout(() => {
-        appendLine(`  DOM Node Count:   <span class="cmd-highlight">${domNodes} nodes</span> (Ultra-lean)`);
-        appendLine(`  Session Uptime:   ${loadTime}ms`);
-        appendLine('  Framework Bloat:  <span class="cmd-highlight">0 KB</span>');
-        appendLine('  Status:           OPTIMAL');
-      }, 220);
-      return;
-    }
-
-    if (commands[cleanCmd]) {
-      commands[cleanCmd].forEach((line) => appendLine(line));
-    } else {
-      appendLine(`Command not recognized: "${escapeHTML(cleanCmd)}". Type <span class="cmd-highlight">help</span> for available commands.`);
-    }
-  }
-
-  function escapeHTML(str) {
-    return str.replace(/[&<>"']/g, (char) => {
-      const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
-      return map[char];
-    });
-  }
-
-  if (terminalForm && terminalInput) {
-    terminalForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      executeCommand(terminalInput.value);
-      terminalInput.value = '';
-    });
-
-    terminalInput.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (commandHistory.length > 0 && historyIndex > 0) {
-          historyIndex--;
-          terminalInput.value = commandHistory[historyIndex];
-        }
-      } else if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
-          historyIndex++;
-          terminalInput.value = commandHistory[historyIndex];
-        } else {
-          historyIndex = commandHistory.length;
-          terminalInput.value = '';
-        }
-      } else if (e.key === 'Tab') {
-        e.preventDefault();
-        const currentVal = terminalInput.value.trim().toLowerCase();
-        const availableCmds = Object.keys(commands).concat(['audit', 'clear']);
-        const match = availableCmds.find((c) => c.startsWith(currentVal));
-        if (match) {
-          terminalInput.value = match;
-        }
-      }
-    });
-  }
-
-  if (cliContainer && terminalInput) {
-    cliContainer.addEventListener('click', () => {
-      if (window.getSelection().toString() === '') {
-        terminalInput.focus();
-      }
-    });
-  }
-
-  if (clearTerminalBtn && terminalOutput) {
-    clearTerminalBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      terminalOutput.innerHTML = '';
-    });
-  }
-
-  cmdChips.forEach((chip) => {
-    chip.addEventListener('click', () => {
-      const cmd = chip.getAttribute('data-cmd');
-      if (cmd) executeCommand(cmd);
-    });
-  });
-
-  /* ========================================================================
-     6. PRICING TIER AUTO-SELECTION INTO INQUIRY FORM
-     ======================================================================== */
-  const tierButtons = document.querySelectorAll('.select-tier-btn');
-  const projectScopeSelect = document.getElementById('projectScope');
-
-  tierButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const selectedTier = btn.getAttribute('data-tier');
-      if (projectScopeSelect && selectedTier) {
-        projectScopeSelect.value = selectedTier;
-      }
-    });
-  });
-
-  /* ========================================================================
-     7. AJAX INQUIRY FORM SUBMISSION (PREVENTS REDIRECT & UPDATES BUTTON)
-     ======================================================================== */
-  const inquiryForm = document.getElementById('inquiryForm');
-  const formFeedback = document.getElementById('formFeedback');
-  const submitBtn = document.getElementById('submitBtn');
-  const submitIcon = document.getElementById('submitIcon');
-
-  if (inquiryForm && formFeedback && submitBtn) {
-    inquiryForm.addEventListener('submit', async (e) => {
-      e.preventDefault(); // Stop standard form redirect
-
-      const name = document.getElementById('clientName').value.trim();
-      const email = document.getElementById('clientEmail').value.trim();
-      const brief = document.getElementById('projectBrief').value.trim();
-      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-      formFeedback.className = 'form-feedback mono';
-
-      if (!name || !emailValid || !brief) {
-        formFeedback.textContent = '[ERROR] Please complete all required fields with a valid work email.';
-        formFeedback.classList.add('is-error');
-        return;
-      }
-
-      // Lock button and show transmitting state
-      submitBtn.disabled = true;
-      if (submitIcon) submitIcon.style.display = 'none';
-      submitBtn.querySelector('span').textContent = 'Transmitting...';
-
-      try {
-        const formData = new FormData(inquiryForm);
-        const response = await fetch(inquiryForm.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          formFeedback.textContent = `[CONFIRMED] Brief logged for ${name}. Expect a technical response within 24 hours.`;
-          formFeedback.classList.add('is-success');
-          
-          // Update button to "Submitted" and keep disabled
-          submitBtn.querySelector('span').textContent = 'Submitted';
-          inquiryForm.reset();
-        } else {
-          const data = await response.json();
-          if (data && data.errors) {
-            formFeedback.textContent = `[ERROR] ${data.errors.map(err => err.message).join(', ')}`;
-          } else {
-            formFeedback.textContent = '[ERROR] Submission failed. Please try emailing directly.';
-          }
-          formFeedback.classList.add('is-error');
-          
-          // Re-enable button on error
-          submitBtn.disabled = false;
-          if (submitIcon) submitIcon.style.display = '';
-          submitBtn.querySelector('span').textContent = 'Transmit Project Brief';
-        }
-      } catch (error) {
-        formFeedback.textContent = '[NETWORK ERROR] Unable to transmit. Check your connection.';
-        formFeedback.classList.add('is-error');
-        
-        submitBtn.disabled = false;
-        if (submitIcon) submitIcon.style.display = '';
-        submitBtn.querySelector('span').textContent = 'Transmit Project Brief';
-      }
-    });
-  }
-});
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
